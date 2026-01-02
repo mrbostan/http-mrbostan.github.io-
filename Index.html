@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Furkan BAYBOSTAN</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --card2:#0f1730;
+      --text:#e9eeff;
+      --muted:#aab6e6;
+      --line:rgba(255,255,255,.10);
+      --accent:#7c5cff;
+      --accent2:#22d3ee;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(124,92,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 80% 15%, rgba(34,211,238,.20), transparent 55%),
+        radial-gradient(700px 500px at 50% 95%, rgba(52,211,153,.12), transparent 60%),
+        linear-gradient(180deg, #070a14 0%, var(--bg) 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{
+      width:min(1080px, 92vw);
+      margin:0 auto;
+      padding:34px 0 60px;
+    }
+
+    /* top */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      background:rgba(18,26,51,.55);
+      backdrop-filter: blur(10px);
+      border-radius:999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+    .logo{
+      width:40px; height:40px;
+      border-radius:14px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      box-shadow: 0 12px 30px rgba(124,92,255,.25);
+      display:grid; place-items:center;
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+    .brand .who{
+      display:flex; flex-direction:column; line-height:1.15;
+    }
+    .brand .who b{font-size:14px}
+    .brand .who span{font-size:12px; color:var(--muted)}
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+    }
+    .chip{
+      padding:9px 12px;
+      border:1px solid var(--line);
+      background:rgba(15,23,48,.55);
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+      transition:.18s ease;
+      user-select:none;
+    }
+    .chip:hover{
+      transform:translateY(-1px);
+      border-color:rgba(124,92,255,.45);
+      color:var(--text);
+    }
+    .cta{
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
+      justify-content:flex-end;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(124,92,255,.55);
+      background: linear-gradient(135deg, rgba(124,92,255,.20), rgba(34,211,238,.12));
+      color:var(--text);
+      font-weight:700;
+      font-size:12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      transition:.18s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(34,211,238,.55)}
+    .btn.secondary{
+      border:1px solid var(--line);
+      background:rgba(15,23,48,.55);
+      color:var(--muted);
+      font-weight:600;
+    }
+    .btn.secondary:hover{color:var(--text); border-color:rgba(255,255,255,.18)}
+    .btn:active{transform:translateY(0px)}
+
+    /* hero */
+    .hero{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(18,26,51,.70), rgba(15,23,48,.55));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:-.6px;
+    }
+    .hero p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .badges{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .badge{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(15,23,48,.55);
+      color:var(--muted);
+    }
+    .badge strong{color:var(--text)}
+    .badge.ok{border-color:rgba(52,211,153,.35)}
+    .badge.warn{border-color:rgba(251,191,36,.35)}
+    .badge.purple{border-color:rgba(124,92,255,.35)}
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+    .mini{
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background:rgba(15,23,48,.55);
+    }
+    .mini .k{font-size:11px; color:var(--muted)}
+    .mini .v{font-size:14px; font-weight:800; margin-top:6px}
+    .mini .sub{font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* right side */
+    .profile{
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .avatar{
+      display:flex; gap:12px; align-items:center;
+    }
+    .face{
+      width:56px; height:56px;
+      border-radius:18px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), transparent 35%),
+                  linear-gradient(135deg, rgba(124,92,255,.35), rgba(34,211,238,.20));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      display:grid; place-items:center;
+      font-weight:900;
+      letter-spacing:.5px;
+    }
+    .avatar .meta{
+      display:flex; flex-direction:column; line-height:1.2;
+    }
+    .avatar .meta b{font-size:14px}
+    .avatar .meta span{font-size:12px; color:var(--muted)}
+    .list{
+      display:flex; flex-direction:column; gap:10px;
+      margin-top:6px;
+    }
+    .li{
+      display:flex; align-items:flex-start; gap:10px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(15,23,48,.55);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      margin-top:4px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(124,92,255,.14);
+      flex:0 0 auto;
+    }
+    .li b{font-size:12px}
+    .li p{margin:4px 0 0; color:var(--muted); font-size:12px; line-height:1.45}
+
+    /* sections */
+    .section{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    .section h2{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+    .proj{
+      display:grid;
+      gap:12px;
+    }
+    .proj-item{
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background:rgba(15,23,48,.55);
+      transition:.18s ease;
+    }
+    .proj-item:hover{
+      transform: translateY(-1px);
+      border-color: rgba(34,211,238,.35);
+    }
+    .proj-item .top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .tag{
+      font-size:11px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: rgba(18,26,51,.50);
+      white-space:nowrap;
+    }
+    .tag.green{border-color:rgba(52,211,153,.35)}
+    .tag.cyan{border-color:rgba(34,211,238,.35)}
+    .tag.purple{border-color:rgba(124,92,255,.35)}
+    .proj-item h3{
+      margin:10px 0 0;
+      font-size:14px;
+    }
+    .proj-item p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    /* footer */
+    footer{
+      margin-top:18px;
+      padding:16px 18px;
+      border:1px solid var(--line);
+      background:rgba(18,26,51,.45);
+      border-radius: var(--radius);
+      color:var(--muted);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
+    /* responsive */
+    @media (max-width: 920px){
+      .hero{grid-template-columns: 1fr}
+      .section{grid-template-columns: 1fr}
+      .brand, .cta{min-width:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div class="who">
+          <b>Reis</b>
+          <span>Mühendis • ürün + sistem kurucu</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Site menüsü">
+        <a class="chip" href="#hakkimda">Hakkımda</a>
+        <a class="chip" href="#projeler">Projeler</a>
+        <a class="chip" href="#odak">Odak</a>
+        <a class="chip" href="#iletisim">İletişim</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn secondary" href="#projeler">Portföy</a>
+        <a class="btn" href="#iletisim">Teklif / İş</a>
+      </div>
+    </header>
+
+    <section class="hero" id="hakkimda">
+      <div class="card">
+        <h1>Ben Reis. Sistemleri “çalışır” hale getiririm.</h1>
+        <p>
+          .NET tarafında katmanlı mimari, SQL Server, MVC/EF tarafı; işin “kurumsal” kısmı.
+          Diğer tarafta mobil (Flutter), ürünleşme, performans, otomasyon… ve hobi olarak da drift oyunu + müzik prodüksiyon.
+          Kısacası: fikri alıp <span class="mono">production</span> seviyesine taşımayı severim.
+        </p>
+
+        <div class="badges">
+          <div class="badge purple"><strong>Stack:</strong> .NET / MVC / SQL Server</div>
+          <div class="badge ok"><strong>Odak:</strong> Ölçeklenebilir mimari</div>
+          <div class="badge warn"><strong>Takıntı:</strong> İsimlendirme & düzen</div>
+        </div>
+
+        <div class="split">
+          <div class="mini">
+            <div class="k">Güçlü yan</div>
+            <div class="v">Katmanlı mimari + iş mantığı</div>
+            <div class="sub">Entities/Core/DataAccess/Business/Mapping/API/Web düzeni.</div>
+          </div>
+          <div class="mini">
+            <div class="k">Yakın hedef</div>
+            <div class="v">Ürünleşen mobil uygulamalar</div>
+            <div class="sub">App Store / Play Store yayın, ASO, reklam entegrasyonu.</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card profile">
+        <div class="avatar">
+          <div class="face">RS</div>
+          <div class="meta">
+            <b>Reis</b>
+            <span>Engineering + Product mindset</span>
+          </div>
+        </div>
+
+        <div class="list">
+          <div class="li">
+            <div class="dot" style="background: var(--good); box-shadow: 0 0 0 4px rgba(52,211,153,.14);"></div>
+            <div>
+              <b>Kurumsal tarafta</b>
+              <p>Envanter / panel / sözleşme / raporlama / altyapı işleri, uçtan uca.</p>
+            </div>
+          </div>
+
+          <div class="li">
+            <div class="dot" style="background: var(--accent2); box-shadow: 0 0 0 4px rgba(34,211,238,.14);"></div>
+            <div>
+              <b>E-ticaret tarafında</b>
+              <p>Varyant (renk-numara), stok düşme, ödeme akışı, performans optimizasyonu.</p>
+            </div>
+          </div>
+
+          <div class="li">
+            <div class="dot" style="background: var(--warn); box-shadow: 0 0 0 4px rgba(251,191,36,.14);"></div>
+            <div>
+              <b>Yan evren</b>
+              <p>Nitroverse drift oyunu, içerik üretimi, lofi/trap prodüksiyon.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="projeler">
+      <div class="card">
+        <h2>Projeler</h2>
+
+        <div class="proj">
+          <div class="proj-item">
+            <div class="top">
+              <span class="tag purple">.NET / Katmanlı</span>
+              <span class="tag">Kurumsal</span>
+            </div>
+            <h3>NTN ekosistemi</h3>
+            <p>
+              Onion/Clean yaklaşımıyla büyüyen modüler yapı: admin panel + son kullanıcı panel + B2B panel.
+              Standartlar: doğru bağımlılık yönü, POCO Entities, tutarlı isimlendirme.
+            </p>
+          </div>
+
+          <div class="proj-item">
+            <div class="top">
+              <span class="tag cyan">MVC / SQL</span>
+              <span class="tag">E-ticaret</span>
+            </div>
+            <h3>AhdenModa tarzı e-ticaret geliştirmeleri</h3>
+            <p>
+              Varyantlı ürün detayları (renk bubble + beden), stok kontrol, sipariş tamamlama, webhook/başarı callback,
+              sepet canlı güncelleme ve performans optimizasyonları.
+            </p>
+          </div>
+
+          <div class="proj-item">
+            <div class="top">
+              <span class="tag green">Flutter</span>
+              <span class="tag">Mobil</span>
+            </div>
+            <h3>Resimden PDF uygulaması</h3>
+            <p>
+              Hızlı ürünleşme: paylaşım, splash, ikon, store build akışı, reklam entegrasyonu (AdMob) ve analiz.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="odak">
+        <h2>Şu anki odak</h2>
+
+        <div class="proj">
+          <div class="proj-item">
+            <div class="top">
+              <span class="tag">Ürünleşme</span>
+              <span class="tag purple">App Store</span>
+            </div>
+            <h3>Zikirmatik uygulaması</h3>
+            <p>
+              Basit, hızlı, temiz arayüz. Offline çalışır. Kullanıcıyı yormayan akış.
+              ASO ile görünürlük, sade değer önerisi.
+            </p>
+          </div>
+
+          <div class="proj-item">
+            <div class="top">
+              <span class="tag cyan">Unity / Oyun</span>
+              <span class="tag">Simülasyon</span>
+            </div>
+            <h3>NitroverseGame</h3>
+            <p>
+              Dış kamera “drone takip” hissi, drift fiziği, düşük MB hedefiyle optimizasyon.
+              Harita kalitesi + oynanış döngüsü.
+            </p>
+          </div>
+
+          <div class="proj-item">
+            <div class="top">
+              <span class="tag green">Müzik</span>
+              <span class="tag">Lo-Fi / Trap</span>
+            </div>
+            <h3>Prodüksiyon</h3>
+            <p>
+              Cajon + gitar + klarnet altyapılarıyla beat üretimi, düzenleme ve yayınlama planı.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="iletisim">
+      <div>
+        <b>İletişim</b> •
+        <span class="mono">mail@ornek.com</span> (burayı değiştir)
+        • <span class="mono">@kullaniciadi</span> (burayı değiştir)
+      </div>
+      <div class="mono">© <span id="yil"></span> Reis — “Çalışmayanı çalıştırır, dağınığı toparlar.”</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // yıl otomatik
+    document.getElementById("yil").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
